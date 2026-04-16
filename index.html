@@ -68,9 +68,9 @@
     .hero__bg {
       position: absolute; inset: 0;
       background:
-        linear-gradient(180deg, rgba(26,26,46,0.45) 0%, rgba(26,26,46,0.80) 100%),
-        url('https://visitkanazawa.jp/lsc/upfile/article/0000/0219/219_1_l.jpg');
-      background-size: cover; background-position: center;
+        linear-gradient(180deg, rgba(26,26,46,0.50) 0%, rgba(26,26,46,0.82) 100%),
+        url('https://www.kanazawa-kankoukyoukai.or.jp/lsc/upfile/photo/0000/0089/89_1_l.jpg');
+      background-size: cover; background-position: center 20%;
     }
     .hero__content {
       position: relative; z-index: 2; padding: 60px 24px 40px; max-width: 720px;
@@ -475,6 +475,16 @@
     }
     @supports (-webkit-touch-callout: none) {
       .parallax-section { background-attachment: scroll; }
+    }
+
+    /* ===== Mobile: ensure Tsuzumimon visible ===== */
+    @media (max-width: 767px) {
+      .hero { min-height: 100svh; }
+      .hero__bg {
+        background-position: center 15%;
+      }
+      .hero__content { padding-top: 80px; }
+      .overview-card { margin: 0 16px; }
     }
 
     /* ===== Desktop ===== */
