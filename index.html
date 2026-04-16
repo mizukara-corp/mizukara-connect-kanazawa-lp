@@ -477,14 +477,17 @@
       .parallax-section { background-attachment: scroll; }
     }
 
-    /* ===== Mobile: ensure Tsuzumimon visible ===== */
+    /* ===== Mobile ===== */
     @media (max-width: 767px) {
-      .hero { min-height: 100svh; }
-      .hero__bg {
-        background-position: center 15%;
+      .hero {
+        min-height: auto;
+        padding: 100px 0 48px;
+        justify-content: flex-start;
       }
-      .hero__content { padding-top: 80px; }
+      .hero__bg { background-position: center 15%; }
+      .hero__content { padding-top: 0; padding-bottom: 24px; }
       .overview-card { margin: 0 16px; }
+      .hero__scroll { display: none; }
     }
 
     /* ===== Desktop ===== */
