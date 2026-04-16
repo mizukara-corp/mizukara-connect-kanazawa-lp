@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ミズカラコネクト金沢 〜自分の可能性に、自分で気づく日〜</title>
+  <meta name="description" content="2026年5月31日（日）金沢にて開催。ミズカラコネクト金沢オフライン会。">
+  <meta property="og:title" content="ミズカラコネクト金沢 〜自分の可能性に、自分で気づく日〜">
+  <meta property="og:description" content="2026.5.31 SUN｜金沢で、仲間と出会い、自分の可能性に気づく一日。">
+  <meta property="og:type" content="website">
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #1a1a2e;
+      --navy-light: #16213e;
+      --gold: #c9a84c;
+      --gold-light: #e2c97e;
+      --white: #ffffff;
+      --off-white: #f8f7f4;
+      --gray: #333333;
+      --gray-light: #888888;
+      --font-main: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      --font-serif: "Hiragino Mincho ProN", "Noto Serif JP", serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--gray);
+      background: var(--white);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== Floating CTA ===== */
+    .floating-cta {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px 20px;
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+    .floating-cta.visible { transform: translateY(0); }
+    .floating-cta__text { color: var(--white); font-size: 0.85rem; display: none; }
+    .floating-cta__btn {
+      display: inline-block; background: var(--gold); color: var(--navy);
+      font-weight: 700; font-size: 0.95rem; padding: 12px 32px;
+      border-radius: 50px; letter-spacing: 0.05em;
+      transition: background 0.3s ease, transform 0.2s ease; white-space: nowrap;
+    }
+    .floating-cta__btn:hover { background: var(--gold-light); transform: scale(1.03); }
+
+    /* ===== Section 1: Hero ===== */
+    .hero {
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center; background: var(--navy); color: var(--white); overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(26,26,46,0.45) 0%, rgba(26,26,46,0.80) 100%),
+        url('https://visitkanazawa.jp/lsc/upfile/article/0000/0219/219_1_l.jpg');
+      background-size: cover; background-position: center;
+    }
+    .hero__content {
+      position: relative; z-index: 2; padding: 60px 24px 40px; max-width: 720px;
+    }
+    .hero__logo {
+      width: 48px; margin: 0 auto 28px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero__logo img {
+      width: 100%; height: auto;
+      filter: brightness(0) invert(1);
+    }
+    .hero__label {
+      font-size: 0.75rem; letter-spacing: 0.3em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 32px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+    .hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 400;
+      line-height: 1.6; letter-spacing: 0.08em; margin-bottom: 24px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+    .hero__date {
+      font-size: clamp(1rem, 3vw, 1.3rem); letter-spacing: 0.15em;
+      color: var(--gold); margin-bottom: 48px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
+    }
+    .hero__divider {
+      width: 40px; height: 1px; background: var(--gold);
+      margin: 0 auto 48px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
+    }
+
+    /* ===== Overview Card ===== */
+    .overview-card {
+      position: relative; z-index: 2;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      border-radius: 16px; padding: 36px 28px; max-width: 560px; margin: 0 auto;
+      backdrop-filter: blur(16px);
+      opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards;
+    }
+    .overview-card__heading {
+      font-size: 0.7rem; letter-spacing: 0.25em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 24px;
+    }
+    .overview-card__grid { display: grid; gap: 16px; }
+    .overview-card__row { display: flex; gap: 16px; align-items: baseline; text-align: left; }
+    .overview-card__label { flex-shrink: 0; width: 72px; font-size: 0.75rem; color: var(--gold); letter-spacing: 0.05em; }
+    .overview-card__value { font-size: 0.95rem; color: var(--white); line-height: 1.6; }
+    .overview-card__value strong { font-weight: 700; }
+    .overview-card__value small { font-size: 0.8rem; color: rgba(255, 255, 255, 0.6); }
+    .overview-card__price-grid { display: grid; gap: 4px; }
+    .overview-card__price-row { display: flex; justify-content: space-between; font-size: 0.9rem; }
+    .overview-card__price-row .type { color: rgba(255, 255, 255, 0.7); }
+    .overview-card__price-row .price { color: var(--white); font-weight: 700; }
+    .overview-card__price-row .price.free { color: var(--gold); }
+    .overview-card__cta { margin-top: 28px; }
+
+    .btn-primary {
+      display: inline-block; width: 100%; background: var(--gold); color: var(--navy);
+      font-weight: 700; font-size: 1rem; padding: 16px 40px;
+      border-radius: 50px; letter-spacing: 0.1em; text-align: center;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: scale(1.02); }
+
+    .hero__scroll {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 2;
+      opacity: 0; animation: fadeUp 0.8s ease 1.6s forwards;
+    }
+    .hero__scroll span {
+      display: block; width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      margin: 0 auto; animation: scrollLine 1.5s ease infinite;
+    }
+
+    /* ===== Kanazawa Photo Strip ===== */
+    .photo-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      width: 100%; overflow: hidden;
+    }
+    .photo-strip__item {
+      aspect-ratio: 1/1; overflow: hidden; position: relative;
+    }
+    .photo-strip__item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .photo-strip__item:hover img { transform: scale(1.08); }
+
+    /* ===== Section: Event Explanation ===== */
+    .event-explain {
+      padding: 100px 24px; max-width: 880px; margin: 0 auto; text-align: center;
+    }
+    .event-explain__lead {
+      font-size: clamp(0.95rem, 2vw, 1.05rem); line-height: 2;
+      color: var(--gray); margin-bottom: 56px; max-width: 640px; margin-left: auto; margin-right: auto;
+    }
+    .event-explain__cards {
+      display: grid; grid-template-columns: 1fr; gap: 24px;
+    }
+    .event-explain__card {
+      background: var(--off-white); border-radius: 16px; padding: 32px 24px;
+      text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .event-explain__card:hover {
+      transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+    .event-explain__card-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--navy); color: var(--gold);
+      font-size: 0.8rem; font-weight: 700; margin-bottom: 16px;
+    }
+    .event-explain__card-title {
+      font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 8px; letter-spacing: 0.03em;
+    }
+    .event-explain__card-desc {
+      font-size: 0.85rem; color: var(--gray-light); line-height: 1.7;
+    }
+
+    /* ===== Section 2: About ===== */
+    .about {
+      padding: 100px 24px; max-width: 700px; margin: 0 auto; text-align: center;
+    }
+    .section-label {
+      font-size: 0.7rem; letter-spacing: 0.3em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 40px;
+    }
+    .about__message {
+      font-family: var(--font-serif);
+      font-size: clamp(1.05rem, 2.5vw, 1.25rem); line-height: 2.2;
+      color: var(--gray); letter-spacing: 0.05em; margin-bottom: 64px;
+    }
+    .about__message em { font-style: normal; color: var(--navy); font-weight: 600; }
+
+    .benefits { display: grid; grid-template-columns: 1fr; gap: 32px; text-align: center; }
+    .benefit { padding: 0 16px; }
+    .benefit__icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .benefit__text { font-size: 0.95rem; line-height: 1.7; color: var(--gray); }
+
+    /* ===== Full-width Photo Break ===== */
+    .photo-break {
+      width: 100%; height: 320px; overflow: hidden; position: relative;
+    }
+    .photo-break img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .photo-break__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(26,26,46,0.15) 0%, rgba(26,26,46,0.5) 100%);
+      display: flex; align-items: flex-end; justify-content: center; padding: 32px 24px;
+    }
+    .photo-break__text {
+      font-family: var(--font-serif); color: var(--white);
+      font-size: clamp(1.2rem, 3vw, 1.6rem); letter-spacing: 0.1em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    /* ===== Section 3: Optional Programs ===== */
+    .optional { background: var(--off-white); padding: 100px 24px; }
+    .optional__inner { max-width: 960px; margin: 0 auto; }
+    .optional__heading { text-align: center; margin-bottom: 16px; }
+    .optional__heading h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 400;
+      color: var(--navy); letter-spacing: 0.08em;
+    }
+    .optional__sub { text-align: center; font-size: 0.85rem; color: var(--gray-light); margin-bottom: 56px; }
+    .optional__grid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+
+    .program-card {
+      background: var(--white); border-radius: 16px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .program-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); }
+
+    .program-card__image {
+      height: 240px; position: relative; overflow: hidden;
+    }
+    .program-card__image img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .program-card:hover .program-card__image img { transform: scale(1.05); }
+
+    .program-card__image-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%);
+      display: flex; flex-direction: column; align-items: flex-start;
+      justify-content: flex-end; padding: 20px;
+    }
+    .program-card__image-name {
+      color: var(--white); font-family: var(--font-serif);
+      font-size: 1.5rem; letter-spacing: 0.1em;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .program-card__image-desc {
+      color: rgba(255,255,255,0.8); font-size: 0.75rem; letter-spacing: 0.05em; margin-top: 4px;
+    }
+    .program-card__tag {
+      display: inline-block; position: absolute; top: 16px; left: 16px;
+      background: rgba(201, 168, 76, 0.9); color: var(--navy);
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em;
+      padding: 4px 12px; border-radius: 20px;
+    }
+
+    .program-card__body { padding: 28px 24px 32px; }
+    .program-card__title { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .program-card__copy {
+      font-family: var(--font-serif); font-size: 0.9rem;
+      color: var(--gray-light); line-height: 1.8; margin-bottom: 20px;
+    }
+    .program-card__details { display: grid; gap: 8px; margin-bottom: 20px; }
+    .program-card__detail { display: flex; gap: 12px; font-size: 0.85rem; line-height: 1.5; }
+    .program-card__detail-label { flex-shrink: 0; width: 56px; color: var(--gray-light); font-size: 0.8rem; }
+    .program-card__detail-value { color: var(--gray); }
+
+    .program-card__link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.85rem; color: var(--gold); font-weight: 600;
+      transition: gap 0.2s ease;
+    }
+    .program-card__link:hover { gap: 10px; }
+    .program-card__link::after { content: "\2192"; }
+
+    .program-card__highlight {
+      margin-top: 16px; padding: 12px 16px;
+      background: rgba(201, 168, 76, 0.08);
+      border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0;
+      font-size: 0.85rem; color: var(--navy); line-height: 1.6;
+    }
+
+    /* ===== Sub Gallery (TILE food) ===== */
+    .food-strip {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+      width: 100%; overflow: hidden; margin-top: 0;
+    }
+    .food-strip__item {
+      aspect-ratio: 1/1; overflow: hidden;
+    }
+    .food-strip__item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .food-strip__item:hover img { transform: scale(1.1); }
+
+    /* ===== Section: Past Events (Video + Gallery) ===== */
+    .past-events {
+      padding: 80px 24px; max-width: 960px; margin: 0 auto; text-align: center;
+    }
+    .past-events__heading { margin-bottom: 16px; }
+    .past-events__heading h2 {
+      font-family: var(--font-serif); font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-weight: 400; color: var(--navy); letter-spacing: 0.08em;
+    }
+    .past-events__sub {
+      font-size: 0.85rem; color: var(--gray-light); margin-bottom: 40px;
+    }
+    .past-events__video {
+      position: relative; width: 100%; padding-bottom: 56.25%; /* 16:9 */
+      margin-bottom: 12px; border-radius: 12px; overflow: hidden;
+      background: var(--navy);
+    }
+    .past-events__video iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+    .past-events__video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.4); gap: 12px;
+    }
+    .past-events__video-placeholder svg {
+      width: 48px; height: 48px; opacity: 0.4;
+    }
+    .past-events__video-placeholder span {
+      font-size: 0.8rem; letter-spacing: 0.05em;
+    }
+    .past-events__video-caption {
+      font-size: 0.8rem; color: var(--gray-light); margin-bottom: 40px; text-align: right;
+    }
+    .past-events__gallery-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+    }
+    .past-events__gallery-item {
+      border-radius: 8px; overflow: hidden; aspect-ratio: 4/3;
+      background: var(--off-white);
+    }
+    .past-events__gallery-item--wide {
+      grid-column: span 2; aspect-ratio: 16/7;
+    }
+    .past-events__gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+
+    /* ===== Section: FAQ ===== */
+    .faq { padding: 80px 24px; background: var(--off-white); }
+    .faq__inner { max-width: 720px; margin: 0 auto; }
+    .faq__heading { text-align: center; margin-bottom: 48px; }
+    .faq__heading h2 {
+      font-family: var(--font-serif); font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      font-weight: 400; color: var(--navy); letter-spacing: 0.08em;
+    }
+    .faq__list { display: grid; gap: 0; }
+    .faq__item {
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .faq__item:first-child { border-top: 1px solid rgba(0,0,0,0.08); }
+    .faq__question {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 0; font-family: var(--font-main);
+      font-size: 0.95rem; font-weight: 600; color: var(--navy);
+      text-align: left; line-height: 1.6; gap: 16px;
+    }
+    .faq__question:hover { color: var(--gold); }
+    .faq__question-icon {
+      flex-shrink: 0; width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.3s ease;
+    }
+    .faq__question-icon svg {
+      width: 16px; height: 16px; stroke: var(--gray-light); stroke-width: 2;
+      fill: none; stroke-linecap: round;
+    }
+    .faq__item.open .faq__question-icon { transform: rotate(45deg); }
+    .faq__answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq__item.open .faq__answer { max-height: 300px; }
+    .faq__answer-inner {
+      padding: 0 0 20px 0;
+      font-size: 0.9rem; color: var(--gray); line-height: 1.8;
+    }
+
+    /* ===== Section 5: Bottom CTA ===== */
+    .bottom-cta {
+      position: relative; overflow: hidden;
+      color: var(--white); text-align: center; padding: 100px 24px;
+    }
+    .bottom-cta__bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(26,26,46,0.75) 0%, rgba(26,26,46,0.92) 100%),
+        url('https://visitkanazawa.jp/lsc/upfile/spot/0001/0212/10212_1_l.jpg');
+      background-size: cover; background-position: center;
+    }
+    .bottom-cta__inner { max-width: 560px; margin: 0 auto; position: relative; z-index: 2; }
+    .bottom-cta__message {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 3.5vw, 1.8rem); font-weight: 400;
+      letter-spacing: 0.08em; line-height: 1.8; margin-bottom: 40px;
+    }
+    .bottom-cta__btn {
+      display: inline-block; background: var(--gold); color: var(--navy);
+      font-weight: 700; font-size: 1rem; padding: 18px 56px;
+      border-radius: 50px; letter-spacing: 0.1em;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .bottom-cta__btn:hover { background: var(--gold-light); transform: scale(1.03); }
+    .bottom-cta__note { margin-top: 16px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.5); }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: #111122; color: rgba(255, 255, 255, 0.4);
+      text-align: center; padding: 32px 24px; font-size: 0.75rem; letter-spacing: 0.05em;
+    }
+    .footer__logo {
+      width: 100px; margin: 0 auto 12px;
+    }
+    .footer__logo img {
+      width: 100%; height: auto;
+      filter: brightness(0) invert(1); opacity: 0.5;
+    }
+
+    /* ===== Animations ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollLine {
+      0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+      50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+      100% { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+    }
+    .fade-in {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== Parallax Hint ===== */
+    .parallax-section {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+    @supports (-webkit-touch-callout: none) {
+      .parallax-section { background-attachment: scroll; }
+    }
+
+    /* ===== Desktop ===== */
+    @media (min-width: 768px) {
+      .floating-cta__text { display: block; }
+      .overview-card { padding: 40px 40px; }
+      .event-explain__cards { grid-template-columns: repeat(3, 1fr); gap: 28px; }
+      .benefits { grid-template-columns: repeat(3, 1fr); gap: 40px; }
+      .optional__grid { grid-template-columns: repeat(2, 1fr); }
+      .past-events__gallery-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .past-events__gallery-item--wide { grid-column: span 3; aspect-ratio: 3/1; }
+      .photo-break { height: 400px; }
+      .program-card__image { height: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating CTA -->
+  <div class="floating-cta" id="floatingCta">
+    <span class="floating-cta__text">2026.5.31 SUN｜金沢</span>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdUJJRFH0I1nA3giXGa7kDVBGkmPiyL_I0GTlawrrNZDhsxKg/viewform" target="_blank" rel="noopener" class="floating-cta__btn">参加を申し込む</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__content">
+      <div class="hero__logo"><img src="https://mizukara.com/wp-content/themes/goalb/assets_renew/images/top/about-logo.svg" alt="MIZUKARA"></div>
+      <p class="hero__label">Mizukara Connect Kanazawa</p>
+      <h1 class="hero__title">自分の可能性に、<br>自分で気づく日。</h1>
+      <div class="hero__divider"></div>
+      <p class="hero__date">2026.5.31 SUN</p>
+    </div>
+    <div class="overview-card">
+      <p class="overview-card__heading">Event Details</p>
+      <div class="overview-card__grid">
+        <div class="overview-card__row">
+          <span class="overview-card__label">日時</span>
+          <span class="overview-card__value"><strong>2026年5月31日（日）</strong></span>
+        </div>
+        <div class="overview-card__row">
+          <span class="overview-card__label">会場</span>
+          <span class="overview-card__value"><strong>金沢市内</strong><br><small>詳細は参加者に別途ご案内</small></span>
+        </div>
+        <div class="overview-card__row">
+          <span class="overview-card__label">参加費</span>
+          <div class="overview-card__value">
+            <div class="overview-card__price-grid">
+              <div class="overview-card__price-row">
+                <span class="type">コネクトメンバー</span>
+                <span class="price free">無料</span>
+              </div>
+              <div class="overview-card__price-row">
+                <span class="type">一般（紹介あり）</span>
+                <span class="price">&yen;2,200</span>
+              </div>
+              <div class="overview-card__price-row">
+                <span class="type">一般（紹介なし）</span>
+                <span class="price">&yen;6,800</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="overview-card__row">
+          <span class="overview-card__label">定員</span>
+          <span class="overview-card__value">20〜30名</span>
+        </div>
+      </div>
+      <div class="overview-card__cta">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdUJJRFH0I1nA3giXGa7kDVBGkmPiyL_I0GTlawrrNZDhsxKg/viewform" target="_blank" rel="noopener" class="btn-primary">参加を申し込む</a>
+      </div>
+    </div>
+    <div class="hero__scroll"><span></span></div>
+  </section>
+
+  <!-- ===== KANAZAWA PHOTO STRIP ===== -->
+  <div class="photo-strip">
+    <div class="photo-strip__item">
+      <img src="https://visitkanazawa.jp/lsc/upfile/spot/0001/0212/10212_1_l.jpg" alt="ひがし茶屋街" loading="lazy">
+    </div>
+    <div class="photo-strip__item">
+      <img src="https://visitkanazawa.jp/lsc/upfile/spot/0001/0060/10060_1_l.jpg" alt="金沢城公園" loading="lazy">
+    </div>
+    <div class="photo-strip__item">
+      <img src="https://visitkanazawa.jp/lsc/upfile/spot/0001/0212/10212_9_l.jpg" alt="ひがし茶屋街の町並み" loading="lazy">
+    </div>
+    <div class="photo-strip__item">
+      <img src="https://visitkanazawa.jp/lsc/upfile/spot/0001/0094/10094_1_l.jpg" alt="志摩（国指定重要文化財）" loading="lazy">
+    </div>
+  </div>
+
+  <!-- ===== EVENT EXPLANATION ===== -->
+  <section class="event-explain" id="event-explain">
+    <p class="section-label fade-in">What is MIZUKARA CONNECT?</p>
+    <p class="event-explain__lead fade-in">
+      ミズカラコネクトは、「自分の人生を自分で決める」人たちが集まるコミュニティです。<br>
+      普段はオンラインで繋がるメンバーが、金沢に集まり、リアルで出会う。<br>
+      このオフライン会では、3つの体験を通じて<br>自分の中にある可能性に気づいていきます。
+    </p>
+    <div class="event-explain__cards fade-in">
+      <div class="event-explain__card">
+        <div class="event-explain__card-num">1</div>
+        <h3 class="event-explain__card-title">仲間のリアルな挑戦を聴く</h3>
+        <p class="event-explain__card-desc">実際に一歩踏み出したメンバーが、自分の挑戦ストーリーを語ります。画面越しでは伝わらなかった熱量を、目の前で感じる時間。</p>
+      </div>
+      <div class="event-explain__card">
+        <div class="event-explain__card-num">2</div>
+        <h3 class="event-explain__card-title">対話を通じて自分を見つめる</h3>
+        <p class="event-explain__card-desc">グループワークで仲間と対話しながら、自分の内面と向き合います。「本当はどうしたい？」——自分の可能性を言語化する時間。</p>
+      </div>
+      <div class="event-explain__card">
+        <div class="event-explain__card-num">3</div>
+        <h3 class="event-explain__card-title">自分の人生を自分で決める</h3>
+        <p class="event-explain__card-desc">仲間の前で、自分の決断を声にする。「やりたい」から生まれる決断を、この場で仲間と共に迎えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about" id="about">
+    <p class="section-label fade-in">About This Event</p>
+    <div class="about__message fade-in">
+      <em>「全ての人に可能性がある」</em><br><br>
+      ミズカラが掲げるこの言葉を、<br>
+      頭ではなく、肌で感じる日。<br><br>
+      画面越しでは伝わらなかった仲間の熱量。<br>
+      目の前で見る、誰かのリアルな挑戦。<br>
+      その空気に触れたとき、<br>
+      自分の中にある可能性に、自分で気づく。<br><br>
+      仲間の存在を力に変えて、<br>
+      自分の人生を、自分で決める。<br><br>
+      そんな一日を、金沢でつくります。
+    </div>
+    <div class="benefits fade-in">
+      <div class="benefit">
+        <div class="benefit__icon">&#x1F91D;</div>
+        <p class="benefit__text">同じ志を持つ仲間と、<br>リアルで繋がる</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit__icon">&#x1F525;</div>
+        <p class="benefit__text">仲間の挑戦に触れて、<br>自分の熱量に火がつく</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit__icon">&#x1F9ED;</div>
+        <p class="benefit__text">自分の可能性に気づき、<br>自分で決める</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PHOTO BREAK: ひがし茶屋街 ===== -->
+  <div class="photo-break">
+    <img src="https://visitkanazawa.jp/lsc/upfile/spot/0001/0212/10212_3_l.jpg" alt="ひがし茶屋街" loading="lazy">
+    <div class="photo-break__overlay">
+      <p class="photo-break__text">舞台は、金沢。</p>
+    </div>
+  </div>
+
+  <!-- ===== PAST EVENTS (Video + Gallery) ===== -->
+  <section class="past-events" id="past-events">
+    <div class="past-events__heading fade-in">
+      <p class="section-label">Past Events</p>
+      <h2>過去のオフライン会の様子</h2>
+    </div>
+    <p class="past-events__sub fade-in">大阪オフライン会では約40名が参加しました。</p>
+
+    <!-- 動画埋め込み（URLは後日差し替え） -->
+    <div class="past-events__video fade-in" id="eventVideo">
+      <!-- ↓ 動画URLが届いたら下記 placeholder を iframe に差し替え ↓ -->
+      <!-- <iframe src="https://www.youtube.com/embed/XXXXXX" title="過去のオフライン会" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+      <div class="past-events__video-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        <span>動画は近日公開</span>
+      </div>
+    </div>
+    <p class="past-events__video-caption fade-in">※動画リンクは後日追加予定</p>
+
+    <!-- フォトギャラリー -->
+    <div class="past-events__gallery-grid fade-in">
+      <div class="past-events__gallery-item past-events__gallery-item--wide">
+        <img src="https://visitkanazawa.jp/lsc/upfile/spot/0001/0212/10212_5_l.jpg" alt="金沢の町並み" loading="lazy">
+      </div>
+      <div class="past-events__gallery-item">
+        <img src="https://visitkanazawa.jp/lsc/upfile/spot/0001/0212/10212_4_l.jpg" alt="金沢" loading="lazy">
+      </div>
+      <div class="past-events__gallery-item">
+        <img src="https://visitkanazawa.jp/lsc/upfile/spot/0001/0212/10212_2_l.jpg" alt="金沢" loading="lazy">
+      </div>
+      <div class="past-events__gallery-item">
+        <img src="https://visitkanazawa.jp/lsc/upfile/spot/0001/0212/10212_10_l.jpg" alt="金沢" loading="lazy">
+      </div>
+      <div class="past-events__gallery-item">
+        <img src="https://visitkanazawa.jp/lsc/upfile/spot/0001/0212/10212_7_l.jpg" alt="金沢" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OPTIONAL PROGRAMS ===== -->
+  <section class="optional" id="optional">
+    <div class="optional__inner">
+      <div class="optional__heading fade-in">
+        <p class="section-label">Optional Programs</p>
+        <h2>金沢を、もっと味わう。</h2>
+      </div>
+      <p class="optional__sub fade-in">本編に加えて、任意参加のプログラムを2つご用意しています。</p>
+
+      <div class="optional__grid">
+        <!-- TILE -->
+        <div class="program-card fade-in">
+          <div class="program-card__image">
+            <img src="https://tile-japan.jp/wp-content/uploads/2021/03/DSC01536.jpg" alt="TILE 店内の様子" loading="lazy">
+            <div class="program-card__image-overlay">
+              <span class="program-card__tag">OPTIONAL</span>
+              <span class="program-card__image-name">TILE</span>
+              <span class="program-card__image-desc">築110年の金沢町家 海鮮丼専門店</span>
+            </div>
+          </div>
+          <div class="program-card__body">
+            <h3 class="program-card__title">前夜祭：食事会</h3>
+            <p class="program-card__copy">
+              イベントが始まる前に、もう仲間になっている。<br>
+              金沢の町家で、地元の海鮮を囲む夜。
+            </p>
+            <div class="program-card__details">
+              <div class="program-card__detail">
+                <span class="program-card__detail-label">日時</span>
+                <span class="program-card__detail-value">5月30日（土）夜</span>
+              </div>
+              <div class="program-card__detail">
+                <span class="program-card__detail-label">会場</span>
+                <span class="program-card__detail-value">TILE（金沢駅 徒歩5分）</span>
+              </div>
+              <div class="program-card__detail">
+                <span class="program-card__detail-label">参加費</span>
+                <span class="program-card__detail-value">実費（3,000〜5,000円目安）</span>
+              </div>
+            </div>
+            <a href="https://tile-japan.jp/" target="_blank" rel="noopener" class="program-card__link">TILE について詳しく見る</a>
+          </div>
+        </div>
+
+        <!-- 旅音 -->
+        <div class="program-card fade-in">
+          <div class="program-card__image">
+            <img src="https://visitkanazawa.jp/lsc/upfile/spot/0001/0196/10196_1_l.jpg" alt="金沢の町家" loading="lazy">
+            <div class="program-card__image-overlay">
+              <span class="program-card__tag">OPTIONAL</span>
+              <span class="program-card__image-name">旅音 TABI-NE</span>
+              <span class="program-card__image-desc">暮らすように旅をする 町家宿泊</span>
+            </div>
+          </div>
+          <div class="program-card__body">
+            <h3 class="program-card__title">宿泊体験：町家に泊まる</h3>
+            <p class="program-card__copy">
+              同じ屋根の下で、語り明かす夜。<br>
+              金沢の町家に、仲間と一緒に泊まる。
+            </p>
+            <div class="program-card__details">
+              <div class="program-card__detail">
+                <span class="program-card__detail-label">日程</span>
+                <span class="program-card__detail-value">5月30日（土）〜</span>
+              </div>
+              <div class="program-card__detail">
+                <span class="program-card__detail-label">宿泊先</span>
+                <span class="program-card__detail-value">旅音（TABI-NE）町家宿泊施設</span>
+              </div>
+              <div class="program-card__detail">
+                <span class="program-card__detail-label">参加費</span>
+                <span class="program-card__detail-value">実費（詳細後日案内）</span>
+              </div>
+            </div>
+            <a href="https://tabi-ne.jp/" target="_blank" rel="noopener" class="program-card__link">旅音について詳しく見る</a>
+            <div class="program-card__highlight">
+              運営メンバーやCXO人も一緒に宿泊。<br>
+              普段オンラインでしか会えない人と、同じ町家で過ごせます。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TILE FOOD STRIP ===== -->
+  <div class="food-strip">
+    <div class="food-strip__item">
+      <img src="https://tile-japan.jp/wp-content/themes/tile/img/top_menu_mosaic.jpg" alt="TILE メニュー" loading="lazy">
+    </div>
+    <div class="food-strip__item">
+      <img src="https://tile-japan.jp/wp-content/uploads/2024/06/Sea-urchin.jpg" alt="うに" loading="lazy">
+    </div>
+    <div class="food-strip__item">
+      <img src="https://tile-japan.jp/wp-content/uploads/2024/06/Salmon-roe.jpg" alt="いくら" loading="lazy">
+    </div>
+    <div class="food-strip__item">
+      <img src="https://tile-japan.jp/wp-content/uploads/2024/06/Noto-Blowfish.jpg" alt="能登ふぐ" loading="lazy">
+    </div>
+    <div class="food-strip__item">
+      <img src="https://tile-japan.jp/wp-content/uploads/2024/06/Sweet-shrimp.jpg" alt="甘海老" loading="lazy">
+    </div>
+  </div>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq" id="faq">
+    <div class="faq__inner">
+      <div class="faq__heading fade-in">
+        <p class="section-label">FAQ</p>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div class="faq__list fade-in">
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>一人で参加しても大丈夫ですか？</span>
+            <span class="faq__question-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq__answer"><div class="faq__answer-inner">もちろんです。参加者の多くがお一人での参加です。当日は運営メンバーが丁寧にサポートしますし、事前オンラインMTGで顔合わせの機会もありますのでご安心ください。</div></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>コネクトメンバーでなくても参加できますか？</span>
+            <span class="faq__question-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq__answer"><div class="faq__answer-inner">はい、一般参加枠をご用意しています。コネクトメンバーからの紹介がある場合は割引料金（2,200円）で参加いただけます。</div></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>前夜祭や宿泊体験は必須ですか？</span>
+            <span class="faq__question-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq__answer"><div class="faq__answer-inner">いいえ、どちらも任意参加のオプションプログラムです。5/31の本編のみのご参加でもまったく問題ありません。</div></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>北陸在住でなくても参加できますか？</span>
+            <span class="faq__question-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq__answer"><div class="faq__answer-inner">はい、どの地域からでもご参加いただけます。全国からのお越しを歓迎しています。</div></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>当日の持ち物はありますか？</span>
+            <span class="faq__question-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq__answer"><div class="faq__answer-inner">筆記用具をお持ちください。それ以外は手ぶらでOKです。</div></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>キャンセルはできますか？</span>
+            <span class="faq__question-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq__answer"><div class="faq__answer-inner">参加申込後のキャンセルについては、別途ご案内いたします。お気軽にお問い合わせください。</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BOTTOM CTA ===== -->
+  <section class="bottom-cta" id="cta">
+    <div class="bottom-cta__bg"></div>
+    <div class="bottom-cta__inner fade-in">
+      <p class="bottom-cta__message">5月31日、<br>金沢で会いましょう。</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdUJJRFH0I1nA3giXGa7kDVBGkmPiyL_I0GTlawrrNZDhsxKg/viewform" target="_blank" rel="noopener" class="bottom-cta__btn">参加を申し込む</a>
+      <p class="bottom-cta__note">コネクトメンバーは参加費無料</p>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__logo"><img src="https://mizukara.com/wp-content/themes/goalb/assets_renew/images/header/logo.svg" alt="MIZUKARA"></div>
+    <p>&copy; 2026 MIZUKARA Inc.</p>
+  </footer>
+
+  <!-- ===== JavaScript ===== -->
+  <script>
+    // Fade-in on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+    // FAQ accordion
+    document.querySelectorAll('.faq__question').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq__item');
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq__item').forEach((i) => i.classList.remove('open'));
+        // Toggle clicked
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+
+    // Floating CTA after hero
+    const floatingCta = document.getElementById('floatingCta');
+    const hero = document.getElementById('hero');
+    const ctaObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          floatingCta.classList.toggle('visible', !entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 }
+    );
+    ctaObserver.observe(hero);
+  </script>
+</body>
+</html>
