@@ -595,6 +595,73 @@
       letter-spacing: 0.05em;
     }
 
+    /* ===== Our Story - CXO Message ===== */
+    .omoi__cxo {
+      margin-top: 80px;
+      padding-top: 56px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+    .omoi__cxo-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 2.8vw, 1.7rem);
+      font-weight: 400;
+      color: var(--navy);
+      letter-spacing: 0.08em;
+      margin: 16px 0 24px;
+    }
+    .omoi__cxo-lead {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--gray);
+      margin: 0 auto 48px;
+      max-width: 640px;
+    }
+    .omoi__cxo-videos {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 56px;
+    }
+    .omoi__cxo-video {
+      display: flex;
+      flex-direction: column;
+    }
+    .omoi__cxo-video video {
+      width: 100%;
+      border-radius: 12px;
+      background: var(--navy);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      display: block;
+    }
+    .omoi__cxo-title {
+      margin: 16px 0 0;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--gray-light);
+      min-height: 1.2em;
+    }
+    .omoi__cxo-name {
+      margin: 4px 0 0;
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--navy);
+      letter-spacing: 0.08em;
+    }
+    .omoi__cxo-closing {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--gray);
+      margin: 0 auto 16px;
+      max-width: 640px;
+    }
+    .omoi__cxo-signature {
+      font-family: var(--font-serif);
+      color: var(--gold);
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+
     /* ===== Sub Gallery (TILE food) ===== */
     .food-strip {
       display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
@@ -792,6 +859,7 @@
       .terms__grid { grid-template-columns: repeat(3, 1fr); }
       .omoi__inner { grid-template-columns: 320px 1fr; gap: 64px; align-items: center; }
       .omoi__photo { margin: 0; }
+      .omoi__cxo-videos { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
   </style>
 </head>
@@ -1128,6 +1196,42 @@
         <p>金沢を楽しみながら、人との出会いを通して、自分の可能性に触れる時間を。</p>
         <p class="omoi__signature">— ひろ（西田広和）</p>
       </div>
+    </div>
+
+    <!-- CXOからのメッセージ -->
+    <div class="omoi__cxo fade-in">
+      <p class="section-label">Message from MIZUKARA</p>
+      <h3 class="omoi__cxo-heading">100名の熱狂を、金沢で。</h3>
+      <p class="omoi__cxo-lead">
+        この想いを実現するために、ミズカラ本社へ突撃し、<br>
+        CXOから皆さんへの一言を預かってきました。
+      </p>
+
+      <div class="omoi__cxo-videos">
+        <div class="omoi__cxo-video">
+          <video controls preload="metadata" playsinline>
+            <source src="videos/yamamiya.mp4" type="video/mp4">
+            お使いのブラウザは動画再生に対応していません。
+          </video>
+          <p class="omoi__cxo-title">株式会社ミズカラ 代表取締役</p>
+          <p class="omoi__cxo-name">山宮さん</p>
+        </div>
+        <div class="omoi__cxo-video">
+          <video controls preload="metadata" playsinline>
+            <source src="videos/gussan.mp4" type="video/mp4">
+            お使いのブラウザは動画再生に対応していません。
+          </video>
+          <p class="omoi__cxo-title">&nbsp;</p>
+          <p class="omoi__cxo-name">ぐっさん</p>
+        </div>
+      </div>
+
+      <p class="omoi__cxo-closing">
+        自分の可能性に、自分で気づく日。<br>
+        エフィカシー（やれる気）を感じる日。<br>
+        ぜひ、金沢でリアルに会いましょう。
+      </p>
+      <p class="omoi__cxo-signature">— ミズカラ金沢オフライン会 リーダー / ヒロ</p>
     </div>
   </section>
 
